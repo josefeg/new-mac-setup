@@ -1,0 +1,72 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Check whether homebrew is installed
+      stat:
+        path: /opt/homebrew/bin/brew
+      register: homebrew_check
+
+    - name: Install homebrew
+      shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"      
+      when: not homebrew_check.stat.exists
+
+    - name: Add homebrew to path
+      ansible.builtin.lineinfile:
+        path: /etc/paths
+        state: present
+        line: '/opt/homebrew/bin'
+      become: true
+      become_user: root
+
+    - name: Install homebrew packages
+      community.general.homebrew:
+        name: [
+          'fzf',
+          'jaq',
+          'macvim',
+          'mas',
+          'starship',
+          'zoxide'
+        ]
+        state: present
+        update_homebrew: true
+
+    - name: Install homebrew casks
+      community.general.homebrew_cask:
+        name: "{{ item }}"
+      with_items:
+        - brave-browser
+        - docker
+        - iterm2
+        - gpg-suite
+        - keka
+        - sourcetree
+        - spotify
+        - viscosity
+        - visual-studio-code
+        - vlc
+    
+    - name: Install apps from App Store
+      shell: mas install {{ item }}
+      with_items:
+        - 803453959 # Slack
+        - 310633997 # WhatsApp
+
+    - name: Check whether ohmyzsh is installed
+      stat:
+        path: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh"
+      register: ohmyzsh_check
+
+    - name: Install ohmyzsh
+      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      when: not ohmyzsh_check.stat.exists
+
+    - name: Add Visual Studio Code extensions
+      shell: code --install-extension {{ item }}
+      with_items:
+        - streetsidesoftware.code-spell-checker # Code Spell Checker
+        - eamodio.gitlens                       # GitLens - Git supercharged
+        - esbenp.prettier-vscode                # Prettier - Code formtter
+        - ms-python.python                      # Python
+        - fabiospampinato.vscode-todo-plus      # Todo+

@@ -18,3 +18,8 @@ python3 ./temp/get-pip.py
 
 sudo pip3 install ansible
 
+git clone https://github.com/josefeg/new-mac-setup.git ./temp/new-mac-setup
+
+ansible-galaxy install -r ./temp/new-mac-setup/ansible_requirements.yaml
+
+ansible-playbook -i "localhost," -c local ./temp/new-mac-setup/ansible_mac.yaml --ask-become-pass
