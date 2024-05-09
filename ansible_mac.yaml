@@ -40,7 +40,9 @@
         - docker
         - iterm2
         - gpg-suite
+        - intellij-idea
         - keka
+        - rider
         - sourcetree
         - spotify
         - viscosity
@@ -50,8 +52,10 @@
     - name: Install apps from App Store
       shell: mas install {{ item }}
       with_items:
-        - 803453959 # Slack
-        - 310633997 # WhatsApp
+        - 1440147259 # AdGuard for Safari
+        - 1544743900 # Hush Nag Blocker
+        - 803453959  # Slack
+        - 310633997  # WhatsApp
 
     - name: Check whether ohmyzsh is installed
       stat:
