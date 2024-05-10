@@ -32,6 +32,7 @@
         - keepingyouawake
         - keka
         - rider
+        - skype
         - sourcetree
         - spotify
         - viscosity
@@ -43,8 +44,10 @@
       with_items:
         - 1440147259 # AdGuard for Safari
         - 1544743900 # Hush Nag Blocker
+        - 1276493162 # reMarkable desktop
         - 803453959  # Slack
         - 310633997  # WhatsApp
+        - 497799835  # Xcode
 
     - include_role:
         name: download_and_install_font
