@@ -3,12 +3,12 @@
 
   tasks:
     - name: Check whether homebrew is installed
-      stat:
+      ansible.builtin.stat:
         path: /opt/homebrew/bin/brew
       register: homebrew_check
 
     - name: Install homebrew
-      shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"      
+      ansible.builtin.shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"      
       when: not homebrew_check.stat.exists
 
     - name: Add homebrew to path
@@ -22,6 +22,8 @@
     - name: Install homebrew packages
       community.general.homebrew:
         name: [
+          'chezmoi',
+          'dotnet',
           'fzf',
           'jaq',
           'macvim',
@@ -50,7 +52,7 @@
         - vlc
     
     - name: Install apps from App Store
-      shell: mas install {{ item }}
+      ansible.builtin.shell: mas install {{ item }}
       with_items:
         - 1440147259 # AdGuard for Safari
         - 1544743900 # Hush Nag Blocker
@@ -58,16 +60,24 @@
         - 310633997  # WhatsApp
 
     - name: Check whether ohmyzsh is installed
-      stat:
+      ansible.builtin.stat:
         path: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh"
       register: ohmyzsh_check
 
     - name: Install ohmyzsh
-      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       when: not ohmyzsh_check.stat.exists
 
+    - name: Install SDKMAN
+      ansible.builtin.shell: bash -c "$(curl -s https://get.sdkman.io)"
+
+    - name: Install Vundle for vim
+      ansible.builtin.git:
+        repo: https://github.com/VundleVim/Vundle.vim.git
+        dest: "/Users/{{ lookup('env', 'USER') }}/.vim/bundle/Vundle.vim"
+
     - name: Add Visual Studio Code extensions
-      shell: code --install-extension {{ item }}
+      ansible.builtin.shell: code --install-extension {{ item }}
       with_items:
         - streetsidesoftware.code-spell-checker # Code Spell Checker
         - eamodio.gitlens                       # GitLens - Git supercharged
