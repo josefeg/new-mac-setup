@@ -1,0 +1,20 @@
+---
+- name: Install homebrew
+  block:
+    - name: Check whether homebrew is installed
+      ansible.builtin.stat:
+        path: /opt/homebrew/bin/brew
+      register: homebrew_check
+
+    - name: Install homebrew
+      ansible.builtin.shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when: not homebrew_check.stat.exists
+
+    - name: Add homebrew to path
+      ansible.builtin.lineinfile:
+        path: /etc/paths
+        state: present
+        line: '/opt/homebrew/bin'
+      become: true
+      become_user: root
+...

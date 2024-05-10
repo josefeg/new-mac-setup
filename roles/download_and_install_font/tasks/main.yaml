@@ -1,0 +1,52 @@
+---
+- name: Add JetBrains Mono Font
+  block:
+    - name: Create temporary directory
+      ansible.builtin.tempfile:
+        state: directory
+      register: create_temp_dir
+
+    - set_fact:
+        temp_dir: "{{ create_temp_dir.path }}"
+
+    - name: Download font
+      ansible.builtin.get_url:
+        url: "{{ font_url }}"
+        dest: "{{ temp_dir }}/font.zip"
+    
+    - name: Unzip archive
+      ansible.builtin.unarchive:
+        src: "{{ temp_dir }}/font.zip"
+        dest: "{{ temp_dir }}"
+
+    - name: Get all font files
+      ansible.builtin.find:
+        paths:
+          - "{{ temp_dir }}"
+        patterns:
+          - "*.ttf"
+          - "*.otf"
+        recurse: true
+      register: font_files
+
+    - set_fact:
+        font_file_paths: "{{
+          font_files.files
+            | map(attribute='path')
+            | list
+        }}"
+    
+    - name: Copy fonts to font library
+      ansible.builtin.copy:
+        src: "{{ font_file_path }}"
+        dest: "/Users/{{ lookup('env', 'USER') }}/Library/Fonts"
+      loop: "{{ font_file_paths }}"
+      loop_control:
+        loop_var: font_file_path
+
+  always:
+    - name: Delete temporary directory
+      file:
+        path: "{{ temp_dir }}"
+        state: absent
+...

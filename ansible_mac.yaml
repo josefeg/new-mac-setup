@@ -2,22 +2,8 @@
 - hosts: localhost
 
   tasks:
-    - name: Check whether homebrew is installed
-      ansible.builtin.stat:
-        path: /opt/homebrew/bin/brew
-      register: homebrew_check
-
-    - name: Install homebrew
-      ansible.builtin.shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"      
-      when: not homebrew_check.stat.exists
-
-    - name: Add homebrew to path
-      ansible.builtin.lineinfile:
-        path: /etc/paths
-        state: present
-        line: '/opt/homebrew/bin'
-      become: true
-      become_user: root
+    - include_role:
+        name: install_homebrew
 
     - name: Install homebrew packages
       community.general.homebrew:
@@ -40,9 +26,10 @@
       with_items:
         - brave-browser
         - docker
-        - iterm2
         - gpg-suite
+        - iterm2
         - intellij-idea
+        - keepingyouawake
         - keka
         - rider
         - sourcetree
@@ -59,14 +46,16 @@
         - 803453959  # Slack
         - 310633997  # WhatsApp
 
-    - name: Check whether ohmyzsh is installed
-      ansible.builtin.stat:
-        path: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh"
-      register: ohmyzsh_check
+    - include_role:
+        name: download_and_install_font
+      vars:
+        font_url: "{{ item }}"
+      loop:
+        - https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
+        - https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip
 
-    - name: Install ohmyzsh
-      ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      when: not ohmyzsh_check.stat.exists
+    - include_role:
+        name: install_ohmyzsh
 
     - name: Install SDKMAN
       ansible.builtin.shell: bash -c "$(curl -s https://get.sdkman.io)"
@@ -84,3 +73,4 @@
         - esbenp.prettier-vscode                # Prettier - Code formtter
         - ms-python.python                      # Python
         - fabiospampinato.vscode-todo-plus      # Todo+
+...

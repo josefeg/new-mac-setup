@@ -1,0 +1,12 @@
+---
+- name: Install ohmyzsh
+  block:
+    - name: Check whether ohmyzsh is installed
+      ansible.builtin.stat:
+        path: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh"
+      register: ohmyzsh_check
+
+    - name: Install ohmyzsh
+      ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      when: not ohmyzsh_check.stat.exists
+...
