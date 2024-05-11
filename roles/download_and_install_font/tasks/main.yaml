@@ -13,7 +13,7 @@
       ansible.builtin.get_url:
         url: "{{ font_url }}"
         dest: "{{ temp_dir }}/font.zip"
-    
+
     - name: Unzip archive
       ansible.builtin.unarchive:
         src: "{{ temp_dir }}/font.zip"
@@ -35,7 +35,7 @@
             | map(attribute='path')
             | list
         }}"
-    
+
     - name: Copy fonts to font library
       ansible.builtin.copy:
         src: "{{ font_file_path }}"
@@ -46,7 +46,7 @@
 
   always:
     - name: Delete temporary directory
-      file:
+      ansible.builtin.file:
         path: "{{ temp_dir }}"
         state: absent
 ...
