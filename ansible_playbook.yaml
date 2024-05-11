@@ -7,17 +7,17 @@
 
     - name: Install homebrew packages
       community.general.homebrew:
-        name: [
-          'chezmoi',
-          'dotnet',
-          'fzf',
-          'jaq',
-          'macvim',
-          'mas',
-          'pipenv',
-          'starship',
-          'zoxide'
-        ]
+        name:
+          - chezmoi
+          - dotnet
+          - fzf
+          - jaq
+          - macvim
+          - mas
+          - pipenv
+          - schappim/ocr/ocr
+          - starship
+          - zoxide
         state: present
         update_homebrew: true
 
