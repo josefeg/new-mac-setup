@@ -38,7 +38,7 @@
         - viscosity
         - visual-studio-code
         - vlc
-    
+
     - name: Install apps from App Store
       ansible.builtin.shell: mas install {{ item }}
       with_items:
@@ -76,4 +76,11 @@
         - esbenp.prettier-vscode                # Prettier - Code formtter
         - ms-python.python                      # Python
         - fabiospampinato.vscode-todo-plus      # Todo+
+
+    - name: Create Visual Studio Code configuration
+      ansible.builtin.template:
+        src: templates/vscode_settings.json.j2
+        dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/settings.json
+        owner: "{{ lookup('env', 'USER') }}"
+        force: yes
 ...
