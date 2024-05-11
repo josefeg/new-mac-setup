@@ -22,4 +22,4 @@ git clone https://github.com/josefeg/new-mac-setup.git ./temp/new-mac-setup
 
 ansible-galaxy install -r ./temp/new-mac-setup/ansible_requirements.yaml
 
-ansible-playbook -i "localhost," -c local ./temp/new-mac-setup/ansible_mac.yaml --ask-become-pass
+ansible-playbook -i "localhost," -c local ./temp/new-mac-setup/ansible_playbook.yaml --ask-become-pass
