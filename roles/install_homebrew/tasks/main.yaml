@@ -10,11 +10,14 @@
       ansible.builtin.shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       when: not homebrew_check.stat.exists
 
+    - set_fact:
+        homebrew_bin_path: /opt/homebrew/bin
+
     - name: Add homebrew to path
       ansible.builtin.lineinfile:
         path: /etc/paths
         state: present
-        line: '/opt/homebrew/bin'
+        line: "{{ homebrew_bin_path }}"
       become: true
       become_user: root
 ...

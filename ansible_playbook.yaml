@@ -70,7 +70,7 @@
         dest: "/Users/{{ lookup('env', 'USER') }}/.vim/bundle/Vundle.vim"
 
     - name: Add Visual Studio Code extensions
-      ansible.builtin.shell: code --install-extension {{ item }}
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/code --install-extension {{ item }}"
       with_items:
         - streetsidesoftware.code-spell-checker # Code Spell Checker
         - eamodio.gitlens                       # GitLens - Git supercharged
@@ -88,8 +88,8 @@
     - name: Configure dotfiles
       block:
         - name: Initialize chezmoi
-          ansible.builtin.shell: chezmoi init https://github.com/josefeg/dotfiles.git
+          ansible.builtin.shell: "{{ homebrew_bin_path }}/chezmoi init https://github.com/josefeg/dotfiles.git"
 
         - name: Install dotfiles
-          ansible.builtin.shell: chezmoi apply --force
+          ansible.builtin.shell: "{{ homebrew_bin_path }}/chezmoi apply --force"
 ...
