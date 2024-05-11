@@ -9,4 +9,14 @@
     - name: Install ohmyzsh
       ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       when: not ohmyzsh_check.stat.exists
+
+    - name: Install fzf-tab plugin
+      ansible.builtin.git:
+        repo: https://github.com/Aloxaf/fzf-tab.git
+        dest: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh/custom/plugins/fzf-tab"
+
+    - name: Install zsh-autosuggestions plugin
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: "/Users/{{ lookup('env', 'USER') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 ...
