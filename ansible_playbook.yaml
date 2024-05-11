@@ -90,4 +90,12 @@
         dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/settings.json
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
+
+    - name: Configure dotfiles
+      block:
+        - name: Initialize chezmoi
+          ansible.builtin.shell: chezmoi init https://github.com/josefeg/dotfiles.git
+
+        - name: Install dotfiles
+          ansible.builtin.shell: chezmoi apply --force
 ...
