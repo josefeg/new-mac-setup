@@ -63,6 +63,13 @@
     - name: Install SDKMAN
       ansible.builtin.shell: bash -c "$(curl -s https://get.sdkman.io)"
 
+    - name: Install pipenv
+      ansible.builtin.pip:
+        executable: pip3
+        name: pipenv
+        state: present
+        extra_args: --user --upgrade
+
     - name: Install Vundle for vim
       ansible.builtin.git:
         repo: https://github.com/VundleVim/Vundle.vim.git
