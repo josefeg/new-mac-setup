@@ -1,0 +1,4 @@
+---
+- name: Restart Finder
+  ansible.builtin.shell: killall Finder
+...

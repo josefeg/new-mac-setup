@@ -3,6 +3,9 @@
 
   tasks:
     - include_role:
+        name: set_macos_settings
+
+    - include_role:
         name: install_homebrew
 
     - name: Install homebrew packages

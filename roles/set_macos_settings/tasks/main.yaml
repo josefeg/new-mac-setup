@@ -1,0 +1,62 @@
+---
+- name: Set Finder settings
+  block:
+    - name: Show all file extensions
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: AppleShowAllExtensions
+        type: bool
+        value: true
+
+    # - name: Show hidden files by default
+    #   community.general.osx_defaults:
+    #     domain: com.apple.finder
+    #     key: AppleShowAllFiles
+    #     type: bool
+    #     value: true
+
+    - name: Show path bar
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowPathbar
+        type: bool
+        value: true
+
+    - name: Show status bar
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowStatusBar
+        type: bool
+        value: true
+
+    - name: Set list view as the default
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        type: string
+        value: Nlsv #  or one of icnv, clmv, Flwv
+
+    - name: Disable creation of .DS_Store on network volumes
+      community.general.osx_defaults:
+        domain: com.apple.desktopservices
+        key: DSDontWriteNetworkStores
+        type: bool
+        value: true
+  notify: Restart Finder
+
+- name: Set Safari settings
+  block:
+    - name: Disable opening of safe downloads on completion
+      community.general.osx_defaults:
+        domain: com.apple.Safari
+        key: AutoOpenSafeDownloads
+        type: bool
+        value: false
+
+    - name: Show full URL
+      community.general.osx_defaults:
+        domain: com.apple.Safari
+        key: ShowFullURLInSmartSearchField
+        type: bool
+        value: true
+...
