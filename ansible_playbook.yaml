@@ -31,15 +31,12 @@
         name: "{{ item }}"
       with_items:
         - brave-browser
-        # - bruno
         - docker
-        # - gpg-suite
         - intellij-idea
         - iterm2
         - keepingyouawake
         - keka
         - qflipper
-        # - rapidapi
         - rider
         - skype
         - sourcetree
