@@ -12,6 +12,7 @@
       community.general.homebrew:
         name:
           - bat
+          - bitwarden-cli
           - btop
           - chezmoi
           - dotnet
@@ -24,19 +25,21 @@
           - starship
           - zoxide
         state: present
-        update_homebrew: true
 
     - name: Install homebrew casks
       community.general.homebrew_cask:
         name: "{{ item }}"
       with_items:
         - brave-browser
+        # - bruno
         - docker
         - gpg-suite
-        - iterm2
         - intellij-idea
+        - iterm2
         - keepingyouawake
         - keka
+        - qflipper
+        # - rapidapi
         - rider
         - skype
         - sourcetree
@@ -89,12 +92,4 @@
         dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/settings.json
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
-
-    - name: Configure dotfiles
-      block:
-        - name: Initialize chezmoi
-          ansible.builtin.shell: "{{ homebrew_bin_path }}/chezmoi init https://github.com/josefeg/dotfiles.git"
-
-        - name: Install dotfiles
-          ansible.builtin.shell: "{{ homebrew_bin_path }}/chezmoi apply --force"
 ...

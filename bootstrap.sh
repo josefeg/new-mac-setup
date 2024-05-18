@@ -23,3 +23,13 @@ git clone https://github.com/josefeg/new-mac-setup.git ./temp/new-mac-setup
 ansible-galaxy install -r ./temp/new-mac-setup/ansible_requirements.yaml
 
 ansible-playbook -i "localhost," -c local ./temp/new-mac-setup/ansible_playbook.yaml --ask-become-pass
+
+export HOMEBREW_BIN_PATH=/opt/homebrew/bin
+export PATH=$PATH:$HOMEBREW_BIN_PATH
+
+export BW_SESSION=$(bw login --raw)
+
+chezmoi init https://github.com/josefeg/dotfiles.git
+chezmoi apply --force
+
+bw logout
