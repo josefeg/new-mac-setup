@@ -10,21 +10,21 @@
 
     - name: Install homebrew packages
       community.general.homebrew:
-        name:
-          - bat
-          - bitwarden-cli
-          - btop
-          - chezmoi
-          - dotnet
-          - fzf
-          - jq
-          - macvim
-          - mas
-          - pipenv
-          - schappim/ocr/ocr
-          - starship
-          - zoxide
-        state: present
+        name: "{{ item }}"
+      with_items:
+        - bat
+        - bitwarden-cli
+        - btop
+        - chezmoi
+        - dotnet
+        - fzf
+        - jq
+        - macvim
+        - mas
+        - pipenv
+        - schappim/ocr/ocr
+        - starship
+        - zoxide
 
     - name: Install homebrew casks
       community.general.homebrew_cask:
@@ -33,7 +33,7 @@
         - brave-browser
         # - bruno
         - docker
-        - gpg-suite
+        # - gpg-suite
         - intellij-idea
         - iterm2
         - keepingyouawake
