@@ -16,7 +16,7 @@
           - chezmoi
           - dotnet
           - fzf
-          - jaq
+          - jq
           - macvim
           - mas
           - pipenv
