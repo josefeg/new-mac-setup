@@ -9,5 +9,5 @@ The `bootstrap.sh` script installs the prerequisites and then starts Ansible. Be
 Once you have configured the required permissions, open Terminal app so that you can run the included `bootstrap.sh` script. You do not need to clone the repository in order to run the script, but you can download it and run it directly via.
 
 ```shell
-curl -s "https://raw.githubusercontent.com/josefeg/new-mac-setup/master/bootstrap.sh" | bash
+bash -c "$(curl -sSL https://raw.githubusercontent.com/josefeg/new-mac-setup/master/bootstrap.sh)"
 ```
