@@ -16,7 +16,6 @@
         - bitwarden-cli
         - btop
         - chezmoi
-        - dotnet
         - fzf
         - jq
         - macvim
@@ -32,6 +31,7 @@
       with_items:
         - brave-browser
         - docker
+        - dotnet-sdk
         - intellij-idea
         - iterm2
         - keepingyouawake
