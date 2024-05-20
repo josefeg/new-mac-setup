@@ -1,4 +1,27 @@
 ---
+- name: Set Global Settings
+  block:
+    - name: Disable automatic spelling correction
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticSpellingCorrectionEnabled
+        type: bool
+        value: false
+
+    - name: Disable automatic quote substitution
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticQuoteSubstitutionEnabled
+        type: bool
+        value: false
+
+    - name: Disable automatic dash substitution
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticDashSubstitutionEnabled
+        type: bool
+        value: false
+
 - name: Set Finder settings
   block:
     - name: Show all file extensions
