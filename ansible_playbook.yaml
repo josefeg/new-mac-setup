@@ -32,6 +32,7 @@
         - brave-browser
         - docker
         - dotnet-sdk
+        - gpg-suite
         - intellij-idea
         - iterm2
         - keepingyouawake
