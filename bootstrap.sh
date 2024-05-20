@@ -30,6 +30,9 @@ export PATH=$PATH:$HOMEBREW_BIN_PATH
 BW_SESSION=$(bw login --raw)
 export BW_SESSION
 
+bw sync
+bw get notes gpg-key | gpg --import
+
 chezmoi init https://github.com/josefeg/dotfiles.git
 chezmoi apply --force
 
