@@ -16,6 +16,7 @@
         - bitwarden-cli
         - btop
         - chezmoi
+        - dockutil
         - fzf
         - jq
         - macvim
@@ -34,9 +35,9 @@
         - dotnet-sdk
         - gpg-suite
         - intellij-idea
-        - iterm2
         - keepingyouawake
         - keka
+        - kitty
         - qflipper
         - rider
         - skype
