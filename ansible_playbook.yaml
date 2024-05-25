@@ -91,4 +91,51 @@
         dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/settings.json
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
+
+    - name: Remove unwanted items from Dock
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --remove {{ item }} || true"
+      with_items:
+        - '"App Store"'
+        - Contacts
+        - FaceTime
+        - Freeform
+        - Mail
+        - Maps
+        - Music
+        - Photos
+        - Reminders
+        - TV
+
+    - set_fact:
+        dock_items_to_keep:
+          - name: Launchpad
+            position: 1
+          - name: '"System Settings"'
+            position: 2
+          - name: Safari
+            position: 3
+          - name: '"Brave Browser"'
+            position: 4
+          - name: Messages
+            position: 5
+          - name: Calendar
+            position: 6
+          - name: Notes
+            position: 7
+          - name: Rider
+            position: 8
+          - name: '"Visual Studio Code"'
+            position: 9
+          - name: kitty
+            position: 10
+          - name: Slack
+            position: 11
+
+    - name: Add items to Dock
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --find {{ item.name }} || {{ homebrew_bin_path }}/dockutil --add /Applications/{{ item.name }}.app"
+      with_items: "{{ dock_items_to_keep }}"
+
+    - name: Reorder Dock
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --move {{ item.name }} --position {{ item.position }}"
+      with_items: "{{ dock_items_to_keep }}"
 ...
