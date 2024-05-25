@@ -1,6 +1,9 @@
 ---
 - hosts: localhost
 
+  vars_files:
+    - variables.yaml
+
   tasks:
     - include_role:
         name: set_macos_settings
@@ -11,59 +14,22 @@
     - name: Install homebrew packages
       community.general.homebrew:
         name: "{{ item }}"
-      with_items:
-        - bat
-        - bitwarden-cli
-        - btop
-        - chezmoi
-        - dockutil
-        - fzf
-        - jq
-        - macvim
-        - mas
-        - pipenv
-        - schappim/ocr/ocr
-        - starship
-        - zoxide
+      with_items: "{{ homebrew_formulae }}"
 
     - name: Install homebrew casks
       community.general.homebrew_cask:
         name: "{{ item }}"
-      with_items:
-        - brave-browser
-        - docker
-        - dotnet-sdk
-        - gpg-suite
-        - intellij-idea
-        - keepingyouawake
-        - keka
-        - kitty
-        - qflipper
-        - rider
-        - skype
-        - sourcetree
-        - spotify
-        - viscosity
-        - visual-studio-code
-        - vlc
+      with_items: "{{ homebrew_casks }}"
 
     - name: Install apps from App Store
       ansible.builtin.shell: mas install {{ item }}
-      with_items:
-        - 1440147259 # AdGuard for Safari
-        - 1544743900 # Hush Nag Blocker
-        - 1276493162 # reMarkable desktop
-        - 803453959  # Slack
-        - 310633997  # WhatsApp
-        - 497799835  # Xcode
+      with_items: "{{ app_store_apps }}"
 
     - include_role:
         name: download_and_install_font
       vars:
         font_url: "{{ item }}"
-      loop:
-        - https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
-        - https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip
+      loop: "{{ fonts }}"
 
     - include_role:
         name: install_ohmyzsh
@@ -78,12 +44,7 @@
 
     - name: Add Visual Studio Code extensions
       ansible.builtin.shell: "{{ homebrew_bin_path }}/code --install-extension {{ item }}"
-      with_items:
-        - streetsidesoftware.code-spell-checker # Code Spell Checker
-        - eamodio.gitlens                       # GitLens - Git supercharged
-        - esbenp.prettier-vscode                # Prettier - Code formtter
-        - ms-python.python                      # Python
-        - fabiospampinato.vscode-todo-plus      # Todo+
+      with_items: "{{ vscode_extensions }}"
 
     - name: Create Visual Studio Code configuration
       ansible.builtin.template:
@@ -94,42 +55,7 @@
 
     - name: Remove unwanted items from Dock
       ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --remove {{ item }} || true"
-      with_items:
-        - '"App Store"'
-        - Contacts
-        - FaceTime
-        - Freeform
-        - Mail
-        - Maps
-        - Music
-        - Photos
-        - Reminders
-        - TV
-
-    - set_fact:
-        dock_items_to_keep:
-          - name: Launchpad
-            position: 1
-          - name: '"System Settings"'
-            position: 2
-          - name: Safari
-            position: 3
-          - name: '"Brave Browser"'
-            position: 4
-          - name: Messages
-            position: 5
-          - name: Calendar
-            position: 6
-          - name: Notes
-            position: 7
-          - name: Rider
-            position: 8
-          - name: '"Visual Studio Code"'
-            position: 9
-          - name: kitty
-            position: 10
-          - name: Slack
-            position: 11
+      with_items: "{{ dock_items_to_remove }}"
 
     - name: Add items to Dock
       ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --find {{ item.name }} || {{ homebrew_bin_path }}/dockutil --add /Applications/{{ item.name }}.app"

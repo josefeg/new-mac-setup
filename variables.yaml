@@ -1,0 +1,91 @@
+---
+homebrew_formulae:
+  - bat
+  - bitwarden-cli
+  - btop
+  - chezmoi
+  - dockutil
+  - fzf
+  - git-delta
+  - jq
+  - macvim
+  - mas
+  - pipenv
+  - pyenv
+  - schappim/ocr/ocr
+  - starship
+  - zoxide
+
+homebrew_casks:
+  - brave-browser
+  - docker
+  - dotnet-sdk
+  - gpg-suite
+  - intellij-idea
+  - keepingyouawake
+  - keka
+  - kitty
+  - qflipper
+  - rider
+  - skype
+  - sourcetree
+  - spotify
+  - viscosity
+  - visual-studio-code
+  - vlc
+
+app_store_apps:
+  - 1440147259 # AdGuard for Safari
+  - 1544743900 # Hush Nag Blocker
+  - 1276493162 # reMarkable desktop
+  - 803453959  # Slack
+  - 310633997  # WhatsApp
+  - 497799835  # Xcode
+
+fonts:
+  - https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
+  - https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip
+
+vscode_extensions:
+  - streetsidesoftware.code-spell-checker # Code Spell Checker
+  - eamodio.gitlens                       # GitLens - Git supercharged
+  - esbenp.prettier-vscode                # Prettier - Code formtter
+  - ms-python.python                      # Python
+  - fabiospampinato.vscode-todo-plus      # Todo+
+
+dock_items_to_remove:
+  - '"App Store"'
+  - Contacts
+  - FaceTime
+  - Freeform
+  - Mail
+  - Maps
+  - Music
+  - Photos
+  - Reminders
+  - TV
+
+dock_items_to_keep:
+  - name: Launchpad
+    position: 1
+  - name: '"System Settings"'
+    position: 2
+  - name: Safari
+    position: 3
+  - name: '"Brave Browser"'
+    position: 4
+  - name: Messages
+    position: 5
+  - name: Calendar
+    position: 6
+  - name: Notes
+    position: 7
+  - name: Rider
+    position: 8
+  - name: '"Visual Studio Code"'
+    position: 9
+  - name: kitty
+    position: 10
+  - name: Slack
+    position: 11
+...
