@@ -1,0 +1,18 @@
+---
+- name: "Get information on {{ item.name }}"
+  ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --find '{{ item.name }}'"
+  register: item_information
+  changed_when: false
+
+- set_fact:
+    current_position: "{{ item_information | regex_replace('^.*slot (\\d+).*$', '\\1') }}"
+
+- name: Reorder Dock
+  block:
+    - name: Move item
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --move '{{ item.name }}' --position {{ item.position }}"
+    - name: Pause due to race condition
+      ansible.builtin.pause:
+        seconds: "{{ pause_in_seconds }}"
+  when: current_position|int != item.position|int
+...

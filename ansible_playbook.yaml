@@ -53,15 +53,6 @@
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
 
-    - name: Remove unwanted items from Dock
-      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --remove {{ item }} || true"
-      with_items: "{{ dock_items_to_remove }}"
-
-    - name: Add items to Dock
-      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --find {{ item.name }} || {{ homebrew_bin_path }}/dockutil --add /Applications/{{ item.name }}.app"
-      with_items: "{{ dock_items_to_keep }}"
-
-    - name: Reorder Dock
-      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --move {{ item.name }} --position {{ item.position }}"
-      with_items: "{{ dock_items_to_keep }}"
+    - include_role:
+        name: customize_dock
 ...

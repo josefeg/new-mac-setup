@@ -1,0 +1,16 @@
+---
+- name: "Check whether {{ item.name }} exists"
+  ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --find '{{ item.name }}'"
+  register: item_exists
+  changed_when: false
+  failed_when: false
+
+- name: "Add {{ item.name }} if doesn't exists"
+  block:
+    - name: Add item
+      ansible.builtin.shell: "{{ homebrew_bin_path }}/dockutil --add '/Applications/{{ item.name }}.app'"
+    - name: Pause due to race condition
+      ansible.builtin.pause:
+        seconds: "{{ pause_in_seconds }}"
+  when: item_exists.rc != 0
+...

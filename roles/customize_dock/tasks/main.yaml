@@ -1,0 +1,13 @@
+---
+- name: Remove unwanted items from Dock
+  ansible.builtin.include_tasks: remove.yaml
+  loop: "{{ dock_items_to_remove }}"
+
+- name: Add required items to Dock
+  ansible.builtin.include_tasks: add.yaml
+  loop: "{{ dock_items_to_keep }}"
+
+- name: Reorder Dock
+  ansible.builtin.include_tasks: reorder.yaml
+  loop: "{{ dock_items_to_keep }}"
+...

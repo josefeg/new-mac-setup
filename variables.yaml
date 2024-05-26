@@ -54,7 +54,7 @@ vscode_extensions:
   - fabiospampinato.vscode-todo-plus      # Todo+
 
 dock_items_to_remove:
-  - '"App Store"'
+  - App Store
   - Contacts
   - FaceTime
   - Freeform
@@ -68,11 +68,11 @@ dock_items_to_remove:
 dock_items_to_keep:
   - name: Launchpad
     position: 1
-  - name: '"System Settings"'
+  - name: System Settings
     position: 2
   - name: Safari
     position: 3
-  - name: '"Brave Browser"'
+  - name: Brave Browser
     position: 4
   - name: Messages
     position: 5
@@ -82,7 +82,7 @@ dock_items_to_keep:
     position: 7
   - name: Rider
     position: 8
-  - name: '"Visual Studio Code"'
+  - name: Visual Studio Code
     position: 9
   - name: kitty
     position: 10
