@@ -10,6 +10,7 @@ homebrew_formulae:
   - jq
   - macvim
   - mas
+  - nvm
   - pipenv
   - pyenv
   - schappim/ocr/ocr
