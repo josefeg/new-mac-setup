@@ -38,8 +38,8 @@ homebrew_casks:
 app_store_apps:
   - 1440147259 # AdGuard for Safari
   - 1544743900 # Hush Nag Blocker
-  - 1276493162 # reMarkable desktop
-  - 803453959  # Slack
+  # - 1276493162 # reMarkable desktop
+  # - 803453959  # Slack
   - 310633997  # WhatsApp
   - 497799835  # Xcode
 
