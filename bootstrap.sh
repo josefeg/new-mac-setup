@@ -16,7 +16,8 @@ TEMP_DIR=$(mktemp -d)
 curl https://bootstrap.pypa.io/get-pip.py -o "$TEMP_DIR/get-pip.py"
 python3 "$TEMP_DIR/get-pip.py"
 
-sudo pip3 install ansible
+python3 -m pip install --user ansible
+export PATH=$PATH:~/Library/Python/3.9/bin
 
 git clone https://github.com/josefeg/new-mac-setup.git "$TEMP_DIR/new-mac-setup"
 
