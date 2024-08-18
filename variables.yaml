@@ -25,7 +25,6 @@ homebrew_casks:
   - intellij-idea
   - keepingyouawake
   - keka
-  - kitty
   - qflipper
   - rider
   - skype
@@ -34,6 +33,7 @@ homebrew_casks:
   - viscosity
   - visual-studio-code
   - vlc
+  - wezterm
 
 app_store_apps:
   - 1440147259 # AdGuard for Safari
