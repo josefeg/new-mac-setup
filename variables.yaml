@@ -39,6 +39,7 @@ homebrew_casks:
 app_store_apps:
   - 1440147259 # AdGuard for Safari
   - 1544743900 # Hush Nag Blocker
+  - 639968404  # Parcel
   - 1276493162 # reMarkable desktop
   # - 803453959  # Slack
   - 310633997  # WhatsApp
@@ -51,6 +52,7 @@ fonts:
 vscode_extensions:
   - streetsidesoftware.code-spell-checker # Code Spell Checker
   - eamodio.gitlens                       # GitLens - Git supercharged
+  - gera2ld.markmap-vscode                # Markmap
   - esbenp.prettier-vscode                # Prettier - Code formtter
   - ms-python.python                      # Python
   - fabiospampinato.vscode-todo-plus      # Todo+
