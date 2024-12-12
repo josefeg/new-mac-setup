@@ -42,6 +42,15 @@
         repo: https://github.com/VundleVim/Vundle.vim.git
         dest: "/Users/{{ lookup('env', 'USER') }}/.vim/bundle/Vundle.vim"
 
+    - name: Ensure vim-plug is installed for Neovim
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "/Users/{{ lookup('env', 'USER') }}/.local/share/nvim/site/autoload/plug.vim"
+        mode: '0644'
+        owner: "{{ lookup('env', 'USER') }}"
+        group: "{{ lookup('env', 'USER') }}"
+      create_directories: true
+
     - name: Add Visual Studio Code extensions
       ansible.builtin.shell: "{{ homebrew_bin_path }}/code --install-extension {{ item }}"
       with_items: "{{ vscode_extensions }}"
