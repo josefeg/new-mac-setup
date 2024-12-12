@@ -22,7 +22,6 @@ homebrew_casks:
   - docker
   - dotnet-sdk
   - gpg-suite
-  - intellij-idea
   - keepingyouawake
   - keka
   - qflipper
