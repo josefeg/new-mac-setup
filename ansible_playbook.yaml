@@ -34,9 +34,6 @@
     - include_role:
         name: install_ohmyzsh
 
-    - name: Install SDKMAN
-      ansible.builtin.shell: bash -c "$(curl -s https://get.sdkman.io)"
-
     - name: Install Vundle for vim
       ansible.builtin.git:
         repo: https://github.com/VundleVim/Vundle.vim.git
