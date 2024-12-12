@@ -8,9 +8,9 @@ homebrew_formulae:
   - fzf
   - git-delta
   - jq
-  - macvim
   - mas
   - nvm
+  - neovim
   - pipenv
   - pyenv
   - schappim/ocr/ocr
