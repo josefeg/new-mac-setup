@@ -46,7 +46,6 @@
         mode: '0644'
         owner: "{{ lookup('env', 'USER') }}"
         group: "{{ lookup('env', 'USER') }}"
-      create_directories: true
 
     - name: Add Visual Studio Code extensions
       ansible.builtin.shell: "{{ homebrew_bin_path }}/code --install-extension {{ item }}"
