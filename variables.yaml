@@ -4,7 +4,7 @@ homebrew_formulae:
   - bitwarden-cli
   - btop
   - chezmoi
-  - dockutil
+  # - dockutil
   - fzf
   - git-delta
   - jq
@@ -20,16 +20,15 @@ homebrew_formulae:
 homebrew_casks:
   - brave-browser
   - docker
-  - dotnet-sdk
+  # - dotnet-sdk
   - gpg-suite
   - keepingyouawake
   - keka
-  - qflipper
-  - rider
-  - skype
+  # - qflipper
+  # - rider
   - sourcetree
   - spotify
-  - telegram
+  # - telegram
   - viscosity
   - visual-studio-code
   - vlc
@@ -37,7 +36,7 @@ homebrew_casks:
 
 app_store_apps:
   - 1440147259 # AdGuard for Safari
-  - 1544743900 # Hush Nag Blocker
+  # - 1544743900 # Hush Nag Blocker
   - 639968404  # Parcel
   - 1276493162 # reMarkable desktop
   # - 803453959  # Slack
