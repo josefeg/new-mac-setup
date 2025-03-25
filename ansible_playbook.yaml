@@ -34,10 +34,10 @@
     - include_role:
         name: install_ohmyzsh
 
-    - name: Install Vundle for vim
-      ansible.builtin.git:
-        repo: https://github.com/VundleVim/Vundle.vim.git
-        dest: "/Users/{{ lookup('env', 'USER') }}/.vim/bundle/Vundle.vim"
+    # - name: Install Vundle for vim
+    #  ansible.builtin.git:
+    #    repo: https://github.com/VundleVim/Vundle.vim.git
+    #    dest: "/Users/{{ lookup('env', 'USER') }}/.vim/bundle/Vundle.vim"
 
     - name: Ensure vim-plug is installed for Neovim
       ansible.builtin.get_url:
@@ -59,6 +59,6 @@
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
 
-    - include_role:
-        name: customize_dock
+    # - include_role:
+    #    name: customize_dock
 ...
