@@ -33,6 +33,7 @@ homebrew_casks:
   - visual-studio-code
   - vlc
   - wezterm
+  - devtoys
 
 app_store_apps:
   - 1440147259 # AdGuard for Safari
